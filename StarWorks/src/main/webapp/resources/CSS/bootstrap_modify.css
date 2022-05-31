@@ -1,0 +1,32 @@
+.form-parent{
+    margin-left:14rem;
+}
+
+.form-control{
+    margin-bottom:1rem;
+    width: 50%;
+}
+
+#an_distinct{
+    width: 30%;
+}
+
+.btn.btn-lg.btn-primary{
+    color: #fff;
+    background-color:#378dfc;
+    border-color: #2c71ca;
+    width: 50%;
+    margin-top:5rem;
+    margin-left:7rem;
+}
+
+.page-process{
+    margin-left:200rem;
+}
+
+#add-phone-book{
+    color:black;
+    margin-left:7rem;
+    margin-top:5rem;
+    margin-bottom:5rem;
+}
