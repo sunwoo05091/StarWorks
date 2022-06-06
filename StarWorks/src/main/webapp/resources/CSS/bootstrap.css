@@ -12212,7 +12212,7 @@ fieldset:disabled .btn {
 	margin-top : 20px;
 	margin-left : 20px;
 	float : left;
-	width : 250px;
+	width : 23%;
 }
 
 .form-floating > .bi-calendar-date + .datepicker_input + label {

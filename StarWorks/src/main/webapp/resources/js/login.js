@@ -80,3 +80,34 @@ $(function() {
 	    
 	});//datepicker end
 });//ready end
+
+var check = (function() {
+
+	function check(login, callback, error) {
+				console.log("check");
+				console.log(login);
+		
+		$.ajax({
+			type : 'post',
+			url : '/check/check',
+			data : JSON.stringify(login),
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr){
+				if(callback){
+				console.log("success");
+					callback(result);
+				}
+			},
+			error : function(xhr, status, er){
+				if (error) {
+				console.log("error");
+					error(er);
+				}
+			}
+		})
+	};
+	
+	return {
+		check : check
+	};
+})();

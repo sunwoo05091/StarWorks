@@ -65,7 +65,7 @@ text-decoration: none;
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="/testGit/Login/mainAction.do">홈
+          <a class="nav-link active" href="/">홈
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
@@ -85,11 +85,22 @@ text-decoration: none;
           <a class="nav-link" href="#">마이페이지</a>
         </li>
       </ul>
-      <form class="d-flex">
-          <a class="nav-link" href="/testGit/Login/logOutAction.do" id = "logout">로그아웃</a>
+      <form class="d-flex" role="form" method='post' action="/logout">
+          <a class="nav-link" href="/" id = "logout" >로그아웃</a>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
       </form>
     </div>
   </div>
 </nav>
+	 <script>
+	
+	$("#logout").on("click", function(e){
+		
+		e.preventDefault();
+		$("form").submit();
+		
+	});
+	
+	</script> 
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
