@@ -9,15 +9,10 @@ import org.starworks.domain.EmpVO;
 public interface MemberMapper {
 	int insertEmp(EmpVO emp);
 
-	int checkId(String id);
 
 	List<EmpVO> listSignUpApprove();
 
 	int updateEmp(EmpVO emp);
-
-	int checkIn(int e_no);
-	
-	int checkOut(int e_no);
 
 	List<EmpVO> listEmp(String dep);
 	
@@ -34,4 +29,10 @@ public interface MemberMapper {
 	void checkout(String id);
 
 	void insertAuth(AuthDTO auth);
+	
+	int checkId(String username);
+
+	String checkPass(String username);
+
+	int checkAppend(String username);
 }

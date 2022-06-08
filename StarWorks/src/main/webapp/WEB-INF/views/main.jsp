@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>StarWorks</title>
 
 <style type = "text/css">
 a{
@@ -17,20 +17,17 @@ text-decoration: none;
 </head>
 <body onload = "printClock()">
 	
-<ul class="nav nav-pills flex-column">
-	<li>	
+<div id="container">
+<div class="card bg-light mb-3 mainitem mainitem1" style="min-width : 20rem;">
 		<div class="card bg-light mb-3" style="max-width: 20rem;">
 		  <div class="card-body">
-    			<img src="/resources/img/pic1.PNG" width="100%" height="100%">
-    			<br>
-  			<br>
-		    <div class="card-text"><div><sec:authentication property="principal.emp.dep"/>부서</div><div><sec:authentication property="principal.emp.grade"/> <sec:authentication property="principal.emp.name"/>님</div></div>
-		  </div>
+  			<img src="/resources/img/pic1.PNG" width="50%" height="50%">
+  		  </div>
 		</div>
-	</li>
-	<li>
-	<div class="card bg-light mb-3" style="max-width: 20rem;">
-	    	<div  style="border:1px solid #dedede; width:100%; height:60px; line-height:50px; color:#666;font-size:50px; text-align:center;" id="clock">
+	  <div class="card-text"><div><sec:authentication property="principal.emp.dep"/>부서 <sec:authentication property="principal.emp.grade"/> <sec:authentication property="principal.emp.name"/>님</div></div>
+  	
+		<div class="card bg-light mb-3" style="max-width: 20rem;">
+	    	<div style="border:1px solid #dedede; width:100%; height:60px; line-height:50px; color:#666;font-size:50px; text-align:center;" id="clock">
 			</div>
 			<div class="btn-group" role="group" aria-label="Basic example">
 			<c:if test="${attendance.a_checkin != null }">
@@ -47,16 +44,9 @@ text-decoration: none;
 			  <button type="button" class="btn btn-secondary" id="workcheckbtn" onclick="location.href='/member/checkout'">퇴근</button>
 			</c:if>
 			</div>
-	</div>
-	</li>
-	<li class="nav-item">
-    	<a class="nav-link" href="/member/organizationchart">조직도</a>
-  </li>
-</ul>
-<div>
-<ul class="mainCard">
-	<li class="mainbox">
-<div class="card bg-light mb-3" style="max-width: 20rem;">
+		</div>
+</div>
+<div class="card bg-light mb-3 mainitem mainitem2" style="min-width : 20rem;" id="item2">
   <div class="card-header"><img src="/resources/img/document.PNG">전자결제</div>
   <div class="card-body">
   <ul>
@@ -72,9 +62,23 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-	</li>
-	<li class="mainbox">
-<div class="card bg-light mb-3" style="max-width: 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem3" style="min-width : 20rem;">
+  <div class="card-header"><img src="/resources/img/document.PNG">전자결제</div>
+  <div class="card-body">
+  <ul>
+	  <li>
+   	 	<a class="card-text" href="/testGit/document/insertForm.do">문서작성</a>
+ 	 </li>
+	  <li>
+   	 	<a class="card-text" href="#">수신함</a>
+ 	 </li>
+	  <li>
+   	 	<a class="card-text" href="/testGit/document/listDocumentSignCompleteAction.do"> 완료문서함</a>
+ 	 </li>
+  </ul>
+  </div>
+</div>
+<div class="card bg-light mb-3 mainitem mainitem4" style="min-width : 20rem;">
   <div class="card-header"><img src="/resources/img/calendar.PNG">일정관리</div>
   <div class="card-body">
   <ul>
@@ -90,9 +94,7 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-	</li>
-	<li class="mainbox">
-<div class="card bg-light mb-3" style="max-width: 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem5" style="min-width : 20rem;">
   <div class="card-header"><img src="/resources/img/board.PNG">공지사항</div>
   <div class="card-body">
   <ul>
@@ -108,13 +110,7 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-	</li>
-</ul>
-</div>
-<div>
-<ul class="mainCard">
-	<li class="mainbox">
-<div class="card bg-light mb-3" style="max-width: 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem6" style="min-width : 20rem;">
   <div class="card-header"><img src="/resources/img/community.PNG">커뮤니티</div>
   <div class="card-body">
   <ul>
@@ -130,9 +126,7 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-	</li>
-	<li class="mainbox">
-<div class="card bg-light mb-3" style="max-width: 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem7" style="min-width : 20rem;">
   <div class="card-header"><img src="/resources/img/mypage.PNG">마이페이지</div>
   <div class="card-body">
   <ul>
@@ -148,10 +142,8 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-	</li>
 	<sec:authorize access="hasRole('ADMIN')">
-	<li class="mainbox">
-<div class="card bg-light mb-3" style="max-width: 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem8" style="min-width : 20rem;">
   <div class="card-header"><img src="/resources/img/personel.PNG">인사관리</div>
   <div class="card-body">
   <ul>
@@ -168,9 +160,7 @@ text-decoration: none;
   </div>
   
 </div>
-	</li>
 	</sec:authorize>
-</ul>
 </div>
 </body>
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>

@@ -54,14 +54,19 @@
 		where e_no = (select e_no from emp where id = #{id}) and a_date = to_date(sysdate,'YYYY-MM-DD')
 	</update>
 	
-	<select id = "checkId" resultType="int">
+ 	<select id = "checkId" resultType="int">
 		select count(*) from emp
 		where id = #{id}
 	</select>
 	
-	<select id = "checkPass" resultType="int">
-		select count(*) from emp
-		where id = #{id} and pass = #{pass}
+	<select id = "checkPass" resultType="String">
+		select pass from emp
+		where id = #{id}
+	</select>
+	
+	<select id = "checkAppend" resultType="int">
+		select signupcheck from emp
+		where id = #{id}
 	</select>
 	 
 	<resultMap type="org.starworks.domain.EmpVO" id="empMap">

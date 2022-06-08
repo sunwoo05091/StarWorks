@@ -81,14 +81,34 @@ text-decoration: none;
         <li class="nav-item">
           <a class="nav-link" href="/testGit/community/listCommunityAction.do">커뮤니티</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">마이페이지</a>
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <sec:authentication property="principal.emp.grade"/> 
+          <sec:authentication property="principal.emp.name"/>님
+          <img class="img-profile rounded-circle" src="/resources/img/mini_pic1.png"></a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">마이페이지</a>
+            <a class="dropdown-item" href="/member/organizationchart">조직도</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+      		<form class="d-flex" role="form" method='post' action="/logout">
+          		<a class="dropdown-item" href="/" id = "logout" >로그아웃</a>
+         		 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+     		 </form>
+          </div>
         </li>
       </ul>
-      <form class="d-flex" role="form" method='post' action="/logout">
-          <a class="nav-link" href="/" id = "logout" >로그아웃</a>
-          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-      </form>
+      
     </div>
   </div>
 </nav>

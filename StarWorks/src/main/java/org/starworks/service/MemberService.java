@@ -20,4 +20,10 @@ public interface MemberService {
 	public void checkin(String id);
 
 	public void checkout(String id);
+
+	public int checkid(String username);
+
+	public String checkpass(String password);
+
+	public int checkAppend(String username);
 }

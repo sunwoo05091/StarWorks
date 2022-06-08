@@ -17,18 +17,19 @@ import org.starworks.domain.EmpVO;
 import org.starworks.domain.LoginDTO;
 import org.starworks.service.MemberService;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @Log4j
+@AllArgsConstructor
 public class CommonController {
 	
 	private MemberService service;
 	
 	@GetMapping("/")
 	public String main(Locale locale, Model model, Principal principal) {
-		
 		if (service.getAttendance(principal.getName()) != null) {
 			model.addAttribute("attendance", service.getAttendance(principal.getName()));
 			log.info("checkin date" + service.getAttendance(principal.getName()).getA_checkin());
@@ -43,10 +44,14 @@ public class CommonController {
 	}
 	
 	@PostMapping("/register")
-	public String register(EmpVO emp, RedirectAttributes rttr) {
+	public String register(EmpVO emp, RedirectAttributes rttr, Model model) {
 		
 		log.info(emp);
-		
+		if (service.checkid(emp.getId()) == 1) {
+			log.info("있는아이디");
+			model.addAttribute("check", 1);
+			return "/register";
+		}
 		service.register(emp);
 		
 		rttr.addFlashAttribute("result", emp.getE_no());

@@ -48,16 +48,10 @@
 								</div>
                                         <button type="submit" class="btn btn-primary" value="로그인">로그인</button>
                                         &nbsp &nbsp &nbsp 
-                                        <c:if test = "${error != null }" >
-                                        	<script type="text/javascript">
-                                        	alert ('${error}')
-                                        	</script>
-                                        </c:if>
-                                         <a href="/member/register" class="btn btn-primary btn-user btn-block"> 계정생성 </a>
+                                         <a href="/register" class="btn btn-primary btn-user btn-block"> 계정생성 </a>
                                         <hr>
                                     </form>
                                     <hr>
-                                    <button type="button" class="btn btn-primary" value="테스트">테스트</button>
                                     <div class="text-center">
                                         <a class="small" href="#"><p onclick = "alert('관리자에게 문의하세요')">비밀번호 찾기</p></a>
                                     </div>
@@ -79,8 +73,15 @@
 $(document).ready(function(){
 	  var formObj = $("form[role='form']");
 	  
-	  //$("button[type='submit']").on("click", function(e){
-	  $("button[type='button']").on("click", function(e){
+	  var csrfHeaderName ="${_csrf.headerName}"; 
+	  var csrfTokenValue="${_csrf.token}";
+	  
+	  $(document).ajaxSend(function(e, xhr, options) { 
+	        xhr.setRequestHeader(csrfHeaderName, csrfTokenValue); 
+	  }); 
+	  
+	  $("button[type='submit']").on("click", function(e){
+	  //$("button[type='button']").on("click", function(e){
 	    
 	    e.preventDefault();
 	    
@@ -95,7 +96,16 @@ $(document).ready(function(){
 	    }
 	    
 	    check.check(login, function(result){
-	    	alert(result);
+	    	if (result == '1'){
+	    		alert("존재하지 않는 아이디 입니다.");
+	    	} else if (result == '2'){
+	    		alert("잘못된 비밀번호 입니다.");
+	    	} else if (result == '3'){
+	    		alert("관리자의 허가를 기다리는 중입니다.");
+	    	} else {
+	    		$("button[type='submit']").unbind('click').click()
+	    	}
+	    	
 	    
 	    });
 	    

@@ -9,19 +9,13 @@
 <%@include file="/WEB-INF/views/includes/header.jsp"%>
 
 </head>
-<body onload = "printClock()">
+<body>
+<div id="container2">
+<div class="tableitem tableitem1">
 <ul class="nav nav-pills flex-column">
-	<li>
-		<div class="card bg-light mb-3" style="max-width: 20rem;">
-		  <div class="card-body">
-		    <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="130" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-    			<rect width="100%" height="100%" fill="#868e96"></rect>
-    			<text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-  			</svg>
-  			<br>
-		    <div class="card-text"><div><sec:authentication property="principal.emp.dep"/>부서</div><div><sec:authentication property="principal.emp.grade"/> <sec:authentication property="principal.emp.name"/>님</div></div>
-	</li>
 </ul>
+</div>
+<div class="tableitem tableitem2" style="min-width : 980px;">
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="/">홈</a></li>
   <li class="breadcrumb-item"><a href="#">인사관리</a></li>
@@ -95,6 +89,8 @@
 	</c:forEach>
 </tbody>
 </table>
+</div>
+</div>
 </body>
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>
 </html>

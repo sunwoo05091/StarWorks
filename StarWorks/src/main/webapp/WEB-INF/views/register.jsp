@@ -15,12 +15,12 @@
 </head>
 <body>
 <body class="bg-gradient-primary">
-<%-- <c:if test="${check == 1 }">
+<c:if test="${check != null }">
 	<div class="alert alert-dismissible alert-light">
   		<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   		<strong>이미 가입된 아이디 입니다.</strong>
 	</div>
-</c:if> --%>
+</c:if>
     <div class="container">
 
         <div class="row justify-content-center">
@@ -37,7 +37,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">계정신청</h1>
                             </div>
-                            <form role="form" class="user" action="/member/register" method="post">
+                            <form role="form" class="user" action="/register" method="post">
                             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">

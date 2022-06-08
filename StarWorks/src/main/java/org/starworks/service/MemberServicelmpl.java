@@ -19,7 +19,6 @@ public class MemberServicelmpl implements MemberService {
 	@Autowired
 	private MemberMapper mapper;
 	
-	@Autowired
 	private PasswordEncoder pwencoder;
 
 	@Override
@@ -68,6 +67,21 @@ public class MemberServicelmpl implements MemberService {
 	public void checkout(String id) {
 		mapper.checkout(id);
 		
+	}
+
+	@Override
+	public int checkid(String username) {
+		return mapper.checkId(username);	
+	}
+
+	@Override
+	public String checkpass(String username) {
+		return mapper.checkPass(username);	
+	}
+
+	@Override
+	public int checkAppend(String username) {
+		return mapper.checkAppend(username);
 	}
 
 }
