@@ -35,4 +35,14 @@ public interface MemberMapper {
 	String checkPass(String username);
 
 	int checkAppend(String username);
+
+	EmpVO getEmp(String username);
+
+	List<EmpVO> listAnnualleave(String username);
+
+	List<EmpVO> listAttendance(String username);
+
+	List<EmpVO> listPaystub(String id);
+
+	List<EmpVO> listPhoneBook(String id);
 }

@@ -699,7 +699,7 @@ progress {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
-  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-right: calc(-1 * var(--bs-gutter-x));
   margin-left: calc(-.5 * var(--bs-gutter-x));
 }
 
@@ -12309,4 +12309,30 @@ fieldset:disabled .btn {
 	height:400px;
 }
 .tableitem2{
+}
+
+#mypageUpdateform{
+  flex-direction: row;
+}
+
+#mypageUpdate{
+	display:flex;
+	gap :20px;
+	padding-left : 20px;
+}
+
+#mypageUpdate .col-sm-10{
+	width:300px;
+}
+
+#mypageUpdate > #empForm{
+	width:80%;
+}
+
+#mypageUpdate > button{
+	display:flex,none;
+}
+
+#imgForm{
+	padding-right:100px;
 }

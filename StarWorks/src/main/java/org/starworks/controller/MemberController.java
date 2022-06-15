@@ -2,6 +2,7 @@ package org.starworks.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,6 +86,41 @@ public class MemberController {
 	public String checkout(Principal principal) {
 		service.checkout(principal.getName());
 		return "redirect:/";
+		
+	}
+	
+	@GetMapping("/mypage")
+	public void getEmp(Principal principal, Model model) {
+		EmpVO emp = service.getEmp(principal.getName());
+		model.addAttribute("emp",emp);
+		
+	}
+	
+	@GetMapping("/listAnnualleave")
+	public void listAnnualleave(Principal principal, Model model) {
+		List<EmpVO> list = service.listAnnualleave(principal.getName());
+		model.addAttribute("list",list);
+		
+	}
+	
+	@GetMapping("/listAttendance")
+	public void listAttendance(Principal principal, Model model) {
+		List<EmpVO> list = service.listAttendance(principal.getName());
+		model.addAttribute("list",list);
+		
+	}
+	
+	@GetMapping("/listPaystub")
+	public void listPaystub(Principal principal, Model model) {
+		List<EmpVO> list = service.listPaystub(principal.getName());
+		model.addAttribute("list",list);
+		
+	}
+	
+	@GetMapping("/listPhoneBook")
+	public void listPhoneBook(Principal principal, Model model) {
+		List<EmpVO> list = service.listPhoneBook(principal.getName());
+		model.addAttribute("list",list);
 		
 	}
 

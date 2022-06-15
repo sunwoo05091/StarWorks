@@ -97,4 +97,24 @@
 	  emp e LEFT OUTER JOIN authorities auth on e.e_no = auth.e_no 
 	WHERE e.id = #{id} 
   </select>
+  
+  <select id="getEmp" resultType="org.starworks.domain.EmpVO">
+  	select * from emp where id= #{id}
+  </select>
+  
+  <select id="listAnnualleave" resultType="org.starworks.domain.AnnualLeaveVO">
+  	select * from annual where e_no = #{id}
+  </select>
+  
+  <select id="listAttendance" resultType="org.starworks.domain.AttendanceVO">
+  	select * from attendance where e_no = #{id} order by a_date desc
+  </select>
+  
+  <select id="listPaystub" resultType="org.starworks.domain.PayStubVO">
+  	select * from paystub where e_no = #{id}
+  </select>
+  
+  <select id="listPhoneBook" resultType="org.starworks.domain.PhoneBookVO">
+  	select * from phonebook where e_no = #{id}
+  </select>
 </mapper>

@@ -13,6 +13,7 @@ public class EmpVO{
 	private String phone_number;
 	private String hiredate;
 	private String sign;
+	private String profile;
 	private int c_no;
 	private String dep;
 	private String grade;

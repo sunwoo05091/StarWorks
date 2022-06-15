@@ -26,4 +26,14 @@ public interface MemberService {
 	public String checkpass(String password);
 
 	public int checkAppend(String username);
+
+	public EmpVO getEmp(String username);
+
+	public List<EmpVO> listAnnualleave(String name);
+
+	public List<EmpVO> listAttendance(String name);
+
+	public List<EmpVO> listPaystub(String name);
+
+	public List<EmpVO> listPhoneBook(String name);
 }

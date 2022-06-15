@@ -84,4 +84,29 @@ public class MemberServicelmpl implements MemberService {
 		return mapper.checkAppend(username);
 	}
 
+	@Override
+	public EmpVO getEmp(String username) {
+		return mapper.getEmp(username);
+	}
+
+	@Override
+	public List<EmpVO> listAnnualleave(String id) {
+		return mapper.listAnnualleave(id);
+	}
+
+	@Override
+	public List<EmpVO> listAttendance(String id) {
+		return mapper.listAttendance(id);
+	}
+
+	@Override
+	public List<EmpVO> listPaystub(String id) {
+		return mapper.listPaystub(id);
+	}
+
+	@Override
+	public List<EmpVO> listPhoneBook(String id) {
+		return mapper.listPhoneBook(id);
+	}
+
 }

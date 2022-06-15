@@ -97,7 +97,7 @@ text-decoration: none;
           <sec:authentication property="principal.emp.name"/>님
           <img class="img-profile rounded-circle" src="/resources/img/mini_pic1.png"></a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">마이페이지</a>
+            <a class="dropdown-item" href="/member/mypage">마이페이지</a>
             <a class="dropdown-item" href="/member/organizationchart">조직도</a>
             <a class="dropdown-item" href="#">Something else here</a>
             <div class="dropdown-divider"></div>
