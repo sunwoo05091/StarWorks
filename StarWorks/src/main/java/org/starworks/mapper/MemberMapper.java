@@ -2,23 +2,47 @@ package org.starworks.mapper;
 
 import java.util.List;
 
-import org.starworks.domain.LoginDTO;
-import org.starworks.domain.MemberVO;
+import org.starworks.domain.AttendanceVO;
+import org.starworks.domain.AuthDTO;
+import org.starworks.domain.EmpVO;
 
 public interface MemberMapper {
-	MemberVO loginEmp(LoginDTO login);
+	int insertEmp(EmpVO emp);
 
-	int insertEmp(MemberVO emp);
 
-	int checkId(String id);
+	List<EmpVO> listSignUpApprove();
 
-	List<MemberVO> listSignUpApprove();
+	int updateEmp(EmpVO emp);
 
-	int updateEmp(MemberVO emp);
-
-	int checkIn(int e_no);
+	List<EmpVO> listEmp(String dep);
 	
-	int checkOut(int e_no);
+	public EmpVO read(String id);
 
-	List<MemberVO> listEmp(int d_no);
+	void checkUpdate(EmpVO emp);
+
+	List<EmpVO> getListCheck();
+
+	AttendanceVO getAttendance(String id);
+
+	void checkin(String id);
+
+	void checkout(String id);
+
+	void insertAuth(AuthDTO auth);
+	
+	int checkId(String username);
+
+	String checkPass(String username);
+
+	int checkAppend(String username);
+
+	EmpVO getEmp(String username);
+
+	List<EmpVO> listAnnualleave(String username);
+
+	List<EmpVO> listAttendance(String username);
+
+	List<EmpVO> listPaystub(String id);
+
+	List<EmpVO> listPhoneBook(String id);
 }

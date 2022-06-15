@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="org.starworks.mapper.MemberMapper">
+	<insert id = "insertEmp">
+		insert into emp(
+			e_no, id, pass, name, phone_number, signupcheck
+		) values(
+			#{e_no}, #{id}, #{pass}, #{name}, #{phone_number}, 0
+		)
+	</insert>
+	
+	<select id = "listEmp" resultType="org.starworks.domain.EmpVO">
+		select * from emp
+		where dep = #{dep}
+	</select>
+	
+	<update id = "checkUpdate">
+		update emp set hiredate = #{hiredate}, dep = #{dep}, grade = #{grade}, signupcheck = 1 
+		where e_no = #{e_no}
+		
+	</update>
+	
+	<insert id="insertAuth">
+		insert into authorities (e_no, authority) values (#{e_no}, 'ROLE_MEMBER')
+		<if test="auth == 2">
+		insert into authorities (e_no, authority) values (#{e_no}, 'ROLE_ADMIN')
+		</if>	
+	</insert>
+	
+	<select id = "getListCheck" resultType="org.starworks.domain.EmpVO">
+		select * from emp
+		where signupcheck = 0 
+	</select>
+	
+	<select id = "getAttendance" resultType="org.starworks.domain.AttendanceVO">
+		select a_date, a_checkin, a_checkout, e_no from attendance
+		where e_no = (select e_no from emp where id = #{id}) and a_date = to_date(sysdate,'yyyy-MM-dd')
+	</select> 
+	
+	<insert id = "checkin">
+		insert into attendance(
+			a_no, e_no, a_date, a_checkin
+		) values(
+			a_no_seq.nextval, (select e_no from emp where id = #{id}), to_date(sysdate,'YYYY-MM-DD'), to_char(sysdate,'HH24:MI')
+		)
+	</insert>
+	
+ 	<update id = "checkout">
+		update attendance set a_checkout = to_char(sysdate,'HH24:MI')
+		where e_no = (select e_no from emp where id = #{id}) and a_date = to_date(sysdate,'YYYY-MM-DD')
+	</update>
+	
+ 	<select id = "checkId" resultType="int">
+		select count(*) from emp
+		where id = #{id}
+	</select>
+	
+	<select id = "checkPass" resultType="String">
+		select pass from emp
+		where id = #{id}
+	</select>
+	
+	<select id = "checkAppend" resultType="int">
+		select signupcheck from emp
+		where id = #{id}
+	</select>
+	 
+	<resultMap type="org.starworks.domain.EmpVO" id="empMap">
+    <id property="e_no" column="e_no"/>
+    <result property="e_no" column="e_no"/>
+    <result property="id" column="id"/>
+    <result property="pass" column="pass"/>
+    <result property="name" column="name"/>
+    <result property="hiredate" column="hiredate"/>
+    <result property="sign" column="sign"/>
+    <result property="c_no" column="c_no"/>
+    <result property="dep" column="dep"/>
+    <result property="grade" column="grade"/>
+    <result property="signupcheck" column="signupcheck"/>
+    <collection property="authList" resultMap="authMap">
+    </collection> 
+  </resultMap>
+  
+  <resultMap type="org.starworks.domain.AuthVO" id="authMap">
+    <result property="e_no" column="e_no"/>
+    <result property="authority" column="authority"/>
+  </resultMap>
+  
+  <select id="read" resultMap="empMap">
+	SELECT 
+	  e.e_no, id, pass, name, hiredate, sign, c_no, dep, grade, signupcheck, authority 
+	FROM 
+	  emp e LEFT OUTER JOIN authorities auth on e.e_no = auth.e_no 
+	WHERE e.id = #{id} 
+  </select>
+  
+  <select id="getEmp" resultType="org.starworks.domain.EmpVO">
+  	select * from emp where id= #{id}
+  </select>
+  
+  <select id="listAnnualleave" resultType="org.starworks.domain.AnnualLeaveVO">
+  	select * from annual where e_no = #{id}
+  </select>
+  
+  <select id="listAttendance" resultType="org.starworks.domain.AttendanceVO">
+  	select * from attendance where e_no = #{id} order by a_date desc
+  </select>
+  
+  <select id="listPaystub" resultType="org.starworks.domain.PayStubVO">
+  	select * from paystub where e_no = #{id}
+  </select>
+  
+  <select id="listPhoneBook" resultType="org.starworks.domain.PhoneBookVO">
+  	select * from phonebook where e_no = #{id}
+  </select>
+</mapper>
