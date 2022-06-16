@@ -11,3 +11,4 @@ public class AttachFileDTO {
 	private boolean image;
 
 }
+
