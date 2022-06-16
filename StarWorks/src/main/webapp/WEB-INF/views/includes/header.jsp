@@ -85,9 +85,7 @@ text-decoration: none;
           <a class="nav-link" href="#">마이페이지</a>
         </li>
       </ul>
-      <form class="d-flex">
           <a class="nav-link" href="/testGit/Login/logOutAction.do" id = "logout">로그아웃</a>
-      </form>
     </div>
   </div>
 </nav>
