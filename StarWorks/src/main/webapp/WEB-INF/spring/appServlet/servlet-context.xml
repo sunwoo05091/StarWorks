@@ -24,6 +24,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="org.starworks.controller" />
+
 	<context:component-scan base-package="org.starworks.domain"/>
 	<context:component-scan base-package="org.starworks.service"/>
 	<context:component-scan base-package="org.starworks.mapper"/>
