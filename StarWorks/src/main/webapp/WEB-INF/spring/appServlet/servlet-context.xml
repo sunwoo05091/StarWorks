@@ -19,14 +19,16 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="prefix" value="/WEB-INF/views/Schedule" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
 	<context:component-scan base-package="org.starworks.controller" />
-	
-	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
-	
+
+	<context:component-scan base-package="org.starworks.domain"/>
+	<context:component-scan base-package="org.starworks.service"/>
+	<context:component-scan base-package="org.starworks.mapper"/>
+	<!-- <security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/> -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 	
 	

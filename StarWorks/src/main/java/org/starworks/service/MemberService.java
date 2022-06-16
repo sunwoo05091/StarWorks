@@ -1,0 +1,39 @@
+package org.starworks.service;
+
+import java.util.List;
+
+import org.starworks.domain.AttendanceVO;
+import org.starworks.domain.EmpVO;
+
+public interface MemberService {
+
+	public void register(EmpVO emp);
+
+	public List<EmpVO> getList(String dep);
+	
+	public List<EmpVO> getListCheck();
+
+	public void checkUpdate(EmpVO emp, String auth);
+
+	public AttendanceVO getAttendance(String id);
+
+	public void checkin(String id);
+
+	public void checkout(String id);
+
+	public int checkid(String username);
+
+	public String checkpass(String password);
+
+	public int checkAppend(String username);
+
+	public EmpVO getEmp(String username);
+
+	public List<EmpVO> listAnnualleave(String name);
+
+	public List<EmpVO> listAttendance(String name);
+
+	public List<EmpVO> listPaystub(String name);
+
+	public List<EmpVO> listPhoneBook(String name);
+}

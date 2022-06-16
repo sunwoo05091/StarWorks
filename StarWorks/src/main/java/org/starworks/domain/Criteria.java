@@ -6,40 +6,38 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
-@ToString
-@Setter
 @Getter
+@Setter
+@ToString
 public class Criteria {
-
-  private int pageNum;
-  private int amount;
-  
-  private String type; //TCW => {T,C,W}
-  private String keyword;
-
-  public Criteria() {
-    this(1, 10);
-  }
-
-  public Criteria(int pageNum, int amount) {
-    this.pageNum = pageNum;
-    this.amount = amount;
-  }
-  
-  public String[] getTypeArr() { //sql문에서 호출됨
-    
-    return type == null? new String[] {}: type.split(""); //문자로 나눠서 배열로 만들어준다
-  }
-  
-  public String getListLink() {
-	  //UriComponentsBuilder 는 브라우저에서 GET 방식등의 파라미터 전송에 사용되는 문자열(쿼리스트링)을 손쉽게 처리할 수 있는 클래스.
-	  UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
-			  .queryParam("pageNum", this.pageNum)
-			  .queryParam("amount", this.getAmount())
-			  .queryParam("type", this.getType())
-			  .queryParam("keyword", this.getKeyword());
-	  
-	  return builder.toUriString();
-  }
+	private int pageNum; //페이지 갯수
+	private int amount; //페이지당 글 갯수
+	
+	private String type;
+	private String keyword;
+	
+	public Criteria() {
+		this(1,10);
+	}
+	
+	public Criteria(int pageNum, int amount) {
+		this.pageNum = pageNum;
+		this.amount = amount;
+	}
+	
+	public String[] getTypeArr() {
+		
+		return type == null ? new String[] {} : type.split("");
+	}
+	
+	public String getListLink() {
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("pageNum", this.pageNum)
+				.queryParam("amount", this.getAmount())
+				.queryParam("type", this.getType())
+				.queryParam("keyword", this.getKeyword());
+		
+		return builder.toUriString();
+	}
 }
