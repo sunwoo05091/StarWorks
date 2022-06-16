@@ -41,8 +41,8 @@ public class MemberTests {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, pwencoder.encode("5555"));
-			pstmt.setInt(2, 5555);
+			pstmt.setString(1, pwencoder.encode("2222"));
+			pstmt.setString(2, "2222");
 			
 			pstmt.executeUpdate();
 			

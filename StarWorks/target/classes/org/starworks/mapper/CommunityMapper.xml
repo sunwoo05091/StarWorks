@@ -4,12 +4,12 @@
 
 
 
-<mapper namespace="kosta.mapper.CommunityMapper">
+<mapper namespace="org.starworks.mapper.CommunityMapper">
 	<cache />
 		
 	
 	
-    <select id="listCommunity" parameterType="Search" resultType="Community">
+  <!--  <select id="listCommunity" parameterType="org.starworks.domain.Search" resultType="org.starworks.domain.CommunityVO">
 		select * from community
  		 <if test="area != null">
 			<where>
@@ -26,29 +26,42 @@
 			
 		 </where>
 		 order by cm_no desc
-	</select>
+	</select> --> 
 	
-	<insert id="insertCommunityTrade" parameterType="Community">
+	<select id="listCommunity" resultType="org.starworks.domain.CommunityVO">
+		select * from community
+	</select> 
+	
+	<insert id="insertCommunityTrade" parameterType="org.starworks.domain.CommunityVO">
 		insert into community (
-			cm_no, cm_price, cm_contents, cm_date, cm_title, cm_hitcount, cm_category, cm_fname, cm_fin, e_no, cm_state
+			cm_no, cm_price, cm_contents, cm_date, cm_title, cm_hitcount, cm_category, cm_fin, e_no, cm_state, cm_fname
 		)values(
-			cm_no_seq.nextval, #{cm_price}, #{cm_contents}, sysdate, #{cm_title}, 0, '중고거래', #{cm_fname}, 1, 1, '판매중' 
+			cm_no_seq.nextval, #{cm_price}, #{cm_contents}, sysdate, #{cm_title}, 0, '중고거래', 1, 1, '판매중', 
+		<if test="cm_fname != null">	
+			#{cm_fname, jdbcType=VARCHAR} 
+		</if>
+		
+		<if test="cm_fname == null">	
+			'' 
+		</if>
 		)
 	</insert>
 	
-	<select id="detailCommunityTrade" resultType="Community" parameterType="int">
+	 <select id="detailCommunityTrade" resultType="org.starworks.domain.CommunityVO">
 		select * from community where cm_no=#{cm_no}	
 	</select>
 	
-	<update id="updateCommunityTrade" parameterType="Community">
+	
+	<update id="updateCommunityTrade" parameterType="org.starworks.domain.CommunityVO">
 		update community set cm_price=#{cm_price}, cm_contents=#{cm_contents}, cm_title=#{cm_title},  
-		<if test ="cm_fname != null">
+		<!-- <if test ="cm_fname != null">
 			cm_fname=#{cm_fname},
-		</if>
+		</if> --> 
 		cm_state=#{cm_state} where cm_no=#{cm_no}
 		
 	</update>
 	
+	<!-- 
 	<update id="updateCommunityClub" parameterType="Community">
 		update community set cm_contents=#{cm_contents}, cm_title=#{cm_title},  
 		<if test ="cm_fname != null">
@@ -80,7 +93,7 @@
 	select count(*) from community
 		<if test="area != null">
 			<where>
-				<!-- where (title LIKE %JSP% OR writer LIKE %JSP%) -->
+				where (title LIKE %JSP% OR writer LIKE %JSP%)
 				<foreach collection="area" item="item" separator="OR" open="(" close=")">
 					${item} LIKE #{searchKey}
 				</foreach>
@@ -95,7 +108,7 @@
 	select count(*) from community
 		<if test="area != null">
 			<where>
-				<!-- where (title LIKE %JSP% OR writer LIKE %JSP%) -->
+				where (title LIKE %JSP% OR writer LIKE %JSP%)
 				<foreach collection="area" item="item" separator="OR" open="(" close=")">
 					${item} LIKE #{searchKey}
 				</foreach>
@@ -110,7 +123,7 @@
 	select count(*) from community
 		<if test="area != null">
 			<where>
-				<!-- where (title LIKE %JSP% OR writer LIKE %JSP%) -->
+				where (title LIKE %JSP% OR writer LIKE %JSP%)
 				<foreach collection="area" item="item" separator="OR" open="(" close=")">
 					${item} LIKE #{searchKey}
 				</foreach>
@@ -200,7 +213,7 @@
 	
 	<select id="noticeCommunity" resultType="Community">
 		select * from community where cm_fin = 0
-	</select>
+	</select> -->
 </mapper>
 
 
