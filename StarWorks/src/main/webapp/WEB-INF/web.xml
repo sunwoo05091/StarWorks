@@ -44,10 +44,12 @@
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>
+
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
 		</filter-class>
 		<init-param>
 			<param-name>encodig</param-name>
+
 			<param-value>UTF-8</param-value>
 		</init-param>
 		<init-param>
@@ -61,6 +63,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
