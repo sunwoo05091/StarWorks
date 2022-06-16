@@ -21,13 +21,16 @@ text-decoration: none;
 <div class="card bg-light mb-3 mainitem mainitem1" style="min-width : 20rem;">
 		<div class="card bg-light mb-3" style="max-width: 20rem;">
 		  <div class="card-body" style="height: 230px;">
-  			<img src="/resources/img/pic1.PNG" width="100%" height="110%">
+  			<img src="/resources/img/pic1.PNG" width="100%" height="150%">
   		  </div>
 		</div>
-	  <div class="card-text"><div><sec:authentication property="principal.emp.dep"/>부서 <sec:authentication property="principal.emp.grade"/> <sec:authentication property="principal.emp.name"/>님</div></div>
+		<br><br><br><br>
+	  <div class="card-text"><div style="font-size: 1.8rem; text-align:center;"><sec:authentication property="principal.emp.dep"/>부서 <sec:authentication property="principal.emp.grade"/> <sec:authentication property="principal.emp.name"/>님</div></div>
   	
-		<div class="card bg-light mb-3" style="max-width: 20rem;">
-	    	<div style="border:1px solid #dedede; width:100%; height:100px; line-height:100px; color:#666;font-size:100px; text-align:center;" id="clock">
+</div>
+<div class="card bg-light mb-3 mainitem mainitem9" style="min-width : 31rem; font-size:1.5rem; height:400px; padding-left:10px;">
+		<div class="card bg-light mb-3" style="max-width: 30rem; height:400px;">
+	    	<div style="padding-top:80px; padding-bottom:20px; border:1px solid #dedede; width:100%; height:180px; line-height:100px; color:#666;font-size:160px; text-align:center;" id="clock">
 			</div>
 			<div class="btn-group" role="group" aria-label="Basic example">
 			<c:if test="${attendance.a_checkin != null }">
@@ -45,9 +48,6 @@ text-decoration: none;
 			</c:if>
 			</div>
 		</div>
-</div>
-<div class="card bg-light mb-3 mainitem mainitem2" style="min-width : 20rem;" id="item2">
-<div id="chart_div"></div>
 <table class="table table-hover">
   <thead>
     <tr class="table-dark">
@@ -65,7 +65,11 @@ text-decoration: none;
   </tbody>
 </table>
 </div>
-<div class="card bg-light mb-3 mainitem mainitem3" style="min-width : 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem2" style="min-width : 30rem;" id="item2">
+<div id="chart_div"></div>
+</div>
+
+<div class="card bg-light mb-3 mainitem mainitem3" style="min-width : 31rem; font-size:1.5rem; height:13rem; padding-left:10px;">
   <div class="card-header"><img src="/resources/img/document.PNG">전자결제</div>
   <div class="card-body">
   <ul>
@@ -81,7 +85,7 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-<div class="card bg-light mb-3 mainitem mainitem4" style="min-width : 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem4" style="min-width : 31rem; font-size:1.5rem; height:13rem; padding-left:10px;">
   <div class="card-header"><img src="/resources/img/calendar.PNG">일정관리</div>
   <div class="card-body">
   <ul>
@@ -97,7 +101,7 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-<div class="card bg-light mb-3 mainitem mainitem5" style="min-width : 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem5" style="min-width : 31rem; font-size:1.5rem; height:13rem; padding-left:10px;">
   <div class="card-header"><img src="/resources/img/board.PNG">공지사항</div>
   <div class="card-body">
   <ul>
@@ -113,7 +117,7 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-<div class="card bg-light mb-3 mainitem mainitem6" style="min-width : 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem6" style="min-width : 31rem; font-size:1.5rem; height:13rem; padding-left:10px;">
   <div class="card-header"><img src="/resources/img/community.PNG">커뮤니티</div>
   <div class="card-body">
   <ul>
@@ -129,7 +133,7 @@ text-decoration: none;
   </ul>
   </div>
 </div>
-<div class="card bg-light mb-3 mainitem mainitem7" style="min-width : 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem7" style="min-width : 31rem; font-size:1.5rem; height:13rem; padding-left:10px;">
   <div class="card-header"><img src="/resources/img/mypage.PNG">마이페이지</div>
   <div class="card-body">
   <ul>
@@ -146,7 +150,7 @@ text-decoration: none;
   </div>
 </div>
 	<sec:authorize access="hasRole('ADMIN')">
-<div class="card bg-light mb-3 mainitem mainitem8" style="min-width : 20rem;">
+<div class="card bg-light mb-3 mainitem mainitem8" style="min-width : 31rem; font-size:1.5rem; height:13rem; padding-left:10px;">
   <div class="card-header"><img src="/resources/img/personel.PNG">인사관리</div>
   <div class="card-body">
   <ul>
@@ -189,7 +193,7 @@ function drawBasic() {
     var options = {
       title: '근퇴 현황',
       width: 660,
-      height:300,
+      height:400,
       hAxis: {},
       vAxis: {}
     };

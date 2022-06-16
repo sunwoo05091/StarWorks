@@ -12281,7 +12281,7 @@ fieldset:disabled .btn {
 	font-size:4rem;
 }
 #workcheckbtn{
-	font-size:0.8rem;
+	font-size:1.5rem;
 	padding:2px;
 }
 
@@ -12306,6 +12306,10 @@ fieldset:disabled .btn {
 }
 .mainitem2 {
 	width: 660px;
+	height:400px;
+}
+.mainitem9 {
+	width: 330px;
 	height:400px;
 }
 .tableitem2{
