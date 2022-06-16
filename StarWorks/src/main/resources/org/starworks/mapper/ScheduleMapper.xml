@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="org.starworks.mapper.ScheduleMapper">
+	<cache />
+
+	<insert id="insertSchedule"
+		parameterType="org.starworks.domain.ScheduleVO">
+		insert into schedule(
+		s_no, s_title, s_contents, s_startday, s_finishday, s_date,situation,s_type
+		)values(s_no_seq.nextval,#{s_title},#{s_contents},#{s_startday},#{s_finishday},sysdate,#{situation},#{s_type})
+	</insert>
+
+<!--  	<select id="listSchedule"
+		resultType="org.starworks.domain.ScheduleVO">
+		select * from schedule
+	</select>  -->
+
+ 	<select id="listSchedule" resultType="org.starworks.domain.ScheduleVO">
+		<![CDATA[
+			select 
+				 s_no, s_title, s_contents, s_startday, s_finishday, s_date,situation,s_type
+			from
+			(
+				select
+					rownum rn, s_no, s_title, s_contents, s_startday, s_finishday, s_date,situation,s_type
+				from 
+					schedule
+				where rownum <= #{pageNum} * #{amount}
+			)
+		where rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select> 
+
+	<select id="detailSchedule" parameterType="int"
+		resultType="org.starworks.domain.ScheduleVO">
+		select * from schedule
+		where s_no = #{s_no}
+	</select>
+
+	<delete id="deleteSchedule" parameterType="int">
+		delete from schedule
+		where s_no = #{s_no}
+	</delete>
+	
+	<delete id="deleteClickSchdule">
+		delete from schedule
+		where s_title = #{s_title}
+	</delete>
+
+	<update id="updateSchedule"
+		parameterType="org.starworks.domain.ScheduleVO">
+		update schedule set
+		s_title=#{s_title}, s_contents= #{s_contents},
+		s_startday=#{s_startday},s_finishday=#{s_finishday},
+		situation=#{situation}, s_type=#{s_type}
+		where s_no = #{s_no}
+	</update>
+	<update id="dragUpdateTime"
+		parameterType="org.starworks.domain.ScheduleVO">
+		update schedule set
+		s_startday=#{s_startday},s_finishday=#{s_finishday}
+		where s_title = #{s_title}
+	</update>
+
+	<select id="countSchedule" resultType="int">
+		select count(*) from
+		schedule
+	</select>
+
+	<select id="todaySchedule"
+		resultType="org.starworks.domain.ScheduleVO">
+		select s_title,s_no,s_startday,s_finishday,situation,
+		trunc(S_FINISHDAY-sysdate,1) AS remainingdays from schedule
+		where sysdate BETWEEN s_startday AND s_finishday
+		AND situation = '진행'
+	</select>
+	<select id="typeSchedule" parameterType="String"
+		resultType="org.starworks.domain.ScheduleVO">
+		select s_title,s_no,s_startday,s_finishday,situation,
+		trunc(S_FINISHDAY-sysdate,1) AS remainingdays from schedule
+		where s_type = #{s_type} AND situation = '진행'
+
+	</select>
+
+	<select id="countMainPage" resultType="int">
+		select
+		count(trunc(S_FINISHDAY-sysdate,0)) AS remainingdays from schedule
+		where situation = '진행'
+	</select>
+	
+	<select id="showSchedule" resultType="org.starworks.domain.ScheduleVO">
+		select
+			s_title, s_contents, s_startday, s_finishday
+		from schedule
+			order by s_no DESC
+	</select>
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

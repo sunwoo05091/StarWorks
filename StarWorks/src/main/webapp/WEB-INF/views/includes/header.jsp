@@ -70,7 +70,7 @@ text-decoration: none;
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/testGit/document/listAction.do">전자결제</a>
+          <a class="nav-link" href="/document/listDocument">전자결제</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/testGit/schedule/moveSchedule.do">일정관리</a>
@@ -108,7 +108,7 @@ text-decoration: none;
           </div>
         </li>
       </ul>
-      
+
     </div>
   </div>
 </nav>
