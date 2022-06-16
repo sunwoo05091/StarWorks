@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.starworks.mapper.DocumentMapper">
+
+	<!-- document 테이블 문서 작성 -->
+<!-- 	<insert id="insertDocument"> -->
+<!-- 		insert into document ( -->
+<!-- 		dc_no, dc_title, dc_contents, -->
+<!-- 		dc_date_start, dc_date_end, dc_drafter, dc_state -->
+<!-- 		) -->
+<!-- 		values ( -->
+<!-- 		dc_no_seq.nextval, #{dc_title}, #{dc_contents}, sysdate, -->
+<!-- 		#{dc_date_end}, #{dc_drafter}, #{dc_state} -->
+<!-- 		) -->
+<!-- 	</insert> -->
+
+	<!-- document 테이블 문서 작성 dc_no 값 출력 및 테이블 삽입 -->
+	<insert id="insertSelectKeyDocument">
+
+		<selectKey keyProperty="dc_no" order="BEFORE"
+			resultType="int">
+			select dc_no_seq.nextval from dual
+		</selectKey>
+
+		insert into document (
+		dc_no, dc_title, dc_contents, dc_date_start,
+		dc_date_end, dc_drafter, dc_state
+		)
+		values (
+		#{dc_no}, #{dc_title},
+		#{dc_contents}, sysdate, #{dc_date_end}, #{dc_drafter}, #{dc_state}
+		)
+	</insert>
+
+	<!-- document 테이블 전체 목록 가져오기 -->
+	<select id="listDocument"
+		resultType="org.starworks.domain.DocumentVO">
+	<![CDATA[
+		select e.e_no, d.dc_no, d.dc_title, d.dc_contents,
+		d.dc_date_start, r.dsi_date, d.dc_date_end, r.dsi_approver,
+		r.dsi_consensus, i.idsi_referrer, i.idsi_implementer, r.dc_type AS rType, i.dc_type AS iType
+		from document d
+		LEFT JOIN emp e
+		ON d.e_no = e.e_no
+		LEFT JOIN directsign r
+		ON e.e_no = r.e_no
+		LEFT JOIN indirectsign i
+		ON r.e_no = i.e_no
+		where d.dc_no > 0 
+		order by d.dc_no desc
+ 		]]>
+	</select>
+
+	<!-- document 테이블에 데이터 조회 -->
+	<select id="getDocument"
+		resultType="org.starworks.domain.DocumentVO">
+		select e.e_no, d.dc_no, d.dc_title, d.dc_contents,
+		d.dc_date_start, r.dsi_date, d.dc_date_end, r.dsi_approver,
+		r.dsi_consensus, i.idsi_referrer, i.idsi_implementer
+		from document d
+		LEFT JOIN emp e
+		ON d.e_no = e.e_no
+		LEFT JOIN directsign r
+		ON d.e_no = r.e_no
+		LEFT JOIN indirectsign i
+		ON r.e_no = i.e_no
+		where d.dc_no = #{dc_no}
+	</select>
+
+	<!-- document 테이블에 데이터 삭제 -->
+	<delete id="deleteDocument">
+		delete document
+		where dc_no = #{dc_no}
+	</delete>
+
+	<!-- document 테이블에 데이터 수정 -->
+	<update id="updateDocument">
+		update document
+		set dc_title= #{dc_title},
+		dc_contents=#{dc_contents}
+		where dc_no = #{dc_no}
+	</update>
+
+	<!-- 검색 기능에 대한 sql -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							dc_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							dc_contents like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							dc_drafter like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'N'.toString()">
+							dc_no like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'D'.toString()">
+							dep like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<!-- document 테이블에 페이징 처리 및 검색 기능 추가 -->
+	<select id="getListWithPaging"
+		resultType="org.starworks.domain.DocumentVO">
+  <![CDATA[
+  select 
+    dc_no, dc_title, dc_contents, dc_date_start, dc_date_end, dc_drafter, dc_state
+  from 
+      (
+      select /*+INDEX_DESC(document dc_no_pk) */
+        rownum rn, dc_no, dc_title, dc_contents, dc_date_start, dc_date_end, dc_drafter, dc_state
+      from 
+        document
+      where 
+  ]]>
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">		<!-- prefixOverrides="OR" : 처음에 or이 나오면 지워달라 -->
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">		<!-- trim prefix="OR" : 처음에 or이 나온다. (ex> where(or ) : 말이 안되는 문법) -->
+					<choose>
+						<when test="type == 'T'.toString()">
+							dc_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							dc_contents like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							dc_drafter like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'N'.toString()">
+							dc_no like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+      
+  <![CDATA[    
+      rownum <= #{pageNum} * #{amount}
+      )
+  where rn > (#{pageNum} -1) * #{amount}   
+  ]]>
+	</select>
+
+	<!-- 게시물 종합에, 검색에 대한 총 게시물을 추가 -->
+	<select id="getTotalCount" resultType="int">
+		select count(*) from document where
+
+		<include refid="criteria"></include> <!-- 이렇게 하면 위에 sql id="criteria"가 불러와진다. -->
+
+		dc_no > 0
+
+	</select>
+
+	<!-- 결재 진행 문서함 -->
+	<select id="listDocumentSignProgress"
+		resultType="org.starworks.domain.DocumentVO">
+		<![CDATA[
+		select * from document d
+        LEFT JOIN emp e
+		ON d.e_no = e.e_no
+		where dc_no > 0 
+		and dc_state = '결재진행'
+		order by dc_no desc
+		]]>
+	</select>
+
+	<!-- 결재 완료 문서함 -->
+	<select id="listDocumentSignComplete"
+		resultType="org.starworks.domain.DocumentVO">
+		<![CDATA[
+		 select * from document d
+        LEFT JOIN emp e
+		ON d.e_no = e.e_no
+		where dc_no > 0 
+		and dc_state = '결재완료'
+		order by dc_no desc
+		]]>
+	</select>
+
+	<!-- 반려 문서함 -->
+	<select id="listDocumentSignCompanion"
+		resultType="org.starworks.domain.DocumentVO">
+		<![CDATA[
+		select * from document d
+        LEFT JOIN emp e
+		ON d.e_no = e.e_no
+		where dc_no > 0 
+		and dc_state = '반려'
+		order by dc_no desc
+		]]>
+	</select>
+
+	<!-- 부서 문서함 -->
+	<select id="listDocumentSignCompleteDepartment"
+		resultType="org.starworks.domain.DocumentVO">
+		<![CDATA[
+        select * from document d
+        LEFT JOIN emp e
+		ON d.e_no = e.e_no
+		where dc_no > 0
+		and dc_state = '결재완료'
+		order by dc_no desc
+		]]>
+	</select>
+
+	<!-- 결재선 사원 테이블 가져오기 및 사원 데이터 전달 -->
+	<select id="listDocumentSign"
+		resultType="org.starworks.domain.DocumentVO">
+	<![CDATA[
+ 		select * from document d
+        LEFT JOIN emp e
+        ON d.e_no = e.e_no
+        LEFT JOIN directsign r
+		ON d.e_no = r.e_no
+        LEFT JOIN indirectsign i
+        ON r.e_no = i.e_no
+        where e.e_no > 0
+ 		]]>
+	</select>
+
+
+</mapper>
