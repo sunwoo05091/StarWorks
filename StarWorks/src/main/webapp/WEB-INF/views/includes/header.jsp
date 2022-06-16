@@ -25,7 +25,7 @@ text-decoration: none;
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Starworks</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +65,7 @@ text-decoration: none;
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="/testGit/Login/mainAction.do">홈
+          <a class="nav-link active" href="/">홈
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
@@ -81,15 +81,46 @@ text-decoration: none;
         <li class="nav-item">
           <a class="nav-link" href="/testGit/community/listCommunityAction.do">커뮤니티</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">마이페이지</a>
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <sec:authentication property="principal.emp.grade"/> 
+          <sec:authentication property="principal.emp.name"/>님
+          <img class="img-profile rounded-circle" src="/resources/img/mini_pic1.png"></a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/member/mypage">마이페이지</a>
+            <a class="dropdown-item" href="/member/organizationchart">조직도</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+      		<form class="d-flex" role="form" method='post' action="/logout">
+          		<a class="dropdown-item" href="/" id = "logout" >로그아웃</a>
+         		 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+     		 </form>
+          </div>
         </li>
       </ul>
-      <form class="d-flex">
-          <a class="nav-link" href="/testGit/Login/logOutAction.do" id = "logout">로그아웃</a>
-      </form>
+      
     </div>
   </div>
 </nav>
+	 <script>
+	
+	$("#logout").on("click", function(e){
+		
+		e.preventDefault();
+		$("form").submit();
+		
+	});
+	
+	</script> 
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -40,6 +40,11 @@
 	
 	<mybatis-spring:scan base-package="org.starworks.mapper"/>
 	
+
+	<context:component-scan base-package="org.starworks.service"/>
+<!-- 	<context:component-scan base-package="org.starworks.aop"/>
+	<context:component-scan base-package="org.starworks.task"/> -->
+
 	
 	<context:component-scan base-package="org.starworks.service"/>
 	
