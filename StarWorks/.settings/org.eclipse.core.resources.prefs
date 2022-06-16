@@ -1,2 +1,7 @@
 eclipse.preferences.version=1
+
 encoding//src/main/webapp/WEB-INF/views/Schedule/fullcalender.jsp=UTF-8
+encoding//src/test/java/org/starworks/service/DocumentServiceTests.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/meetingroom/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/meetingroom/test.jsp=UTF-8
+
